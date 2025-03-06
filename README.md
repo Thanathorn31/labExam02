@@ -103,6 +103,8 @@ touch newindex.html
 edit file html and write something
 ```
 nano newindex.html
+
+<h1>hii stamp</h1>
 ```
 
 check file html
@@ -128,7 +130,7 @@ services:
     image: nginx
     container_name: my-nginx
     ports:
-      - "8080:80"
+      - "8083:80"
     volumes:
       - ./newindex.html:/usr/share/nginx/html/index.html
 ```
