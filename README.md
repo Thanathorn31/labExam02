@@ -42,15 +42,17 @@ nano index.html
 ```
 - สร้าง `Dockerfile`:
 ```Dockerfile
+nano Dockerfile
 FROM nginx
 COPY index.html /usr/share/nginx/html/index.html
 ```
 - สร้างและรัน Docker image:
 ```bash
+
 docker build -t mycustomnginx .
-docker run --name customnginx -d -p 8080:80 mycustomnginx
+docker run --name customnginx -d -p 8081:80 mycustomnginx
 ```
-- เข้าไปที่ `http://<IP-ADDRESS>:8080`
+- เข้าไปที่ `http://<IP-ADDRESS>:8081`
 
 ## 7. อัปโหลด Image ไปยัง Docker Hub
 ```bash
@@ -59,7 +61,7 @@ docker tag mycustomnginx <DOCKER_USERNAME>/mycustomnginx
 docker push <DOCKER_USERNAME>/mycustomnginx
 ```
 
-### 8. ใช้ Volume เพื่อแสดงหน้าเว็บจากข้อ 3
+## 8. ใช้ Volume เพื่อแสดงหน้าเว็บจากข้อ 3
 ```bash
 docker run --name nginx-volume -d -p 8081:80 -v /var/www/html/index.html:/usr/share/nginx/html/index.html nginx
 ```
