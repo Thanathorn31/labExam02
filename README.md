@@ -1,6 +1,6 @@
 # labExam02
 
-## 1. (Virtual Machine) 
+## 1. Create instance (Virtual Machine) 
 ใน Aws และ connect ใน terminal **อย่าลืมใส่ security group SSH HTTP Custom TCP (8080 - 8090)
 
 ## 2. Install Nginx และแสดงหน้า Nginx
