@@ -139,6 +139,9 @@ services:
 ```
 then run
 ```
+sudo apt update
+sudo apt install docker-compose -y
+
 docker compose up -d
 ```
 stop
