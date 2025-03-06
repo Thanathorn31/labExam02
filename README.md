@@ -2,8 +2,9 @@
 
 ## 1. Create instance (Virtual Machine) 
 ใน Aws และ connect ใน terminal **อย่าลืมใส่ security group SSH HTTP Custom TCP (8080 - 8090)
+<img width="901" alt="Screenshot 2568-03-06 at 23 20 02" src="https://github.com/user-attachments/assets/f4e0b663-20b3-41a6-bafe-6e4264dc176f" />
 
-## 2. Install Nginx และแสดงหน้า Nginx
+## 2.Connect Vm และ Install Nginx และแสดงหน้า Nginx 
 ```
 sudo apt update
 sudo apt install nginx -y
@@ -11,16 +12,20 @@ sudo systemctl start nginx
 sudo systemctl enable nginx
 sudo systemctl status nginx
 ```
-- เปิดเบราว์เซอร์ไปที่ `http://<IP-ADDRESS>` เพื่อดูหน้าเว็บของ Nginx
+- `http://<IP-ADDRESS>` เพื่อดูหน้าเว็บของ Nginx
+<img width="1122" alt="Screenshot 2568-03-06 at 23 22 30" src="https://github.com/user-attachments/assets/ce711df9-8a58-427e-a114-ebb7d954de44" />
 
 ## 3. แก้ไขไฟล์ HTML เพื่อเปลี่ยนหน้าเว็บ
 ```
-sudo nano /var/www/html/index.html
+sudo nano /var/www/html/index.
+
+<h1>labExam</h1>
 ```
-- แก้ไขเนื้อหา HTML แล้วบันทึก
+- แก้ไขเนื้อหา HTML แล้วบันทึก รีweb
 
 ## 4. Install Docker และ Run "hello-world"
 ```bash
+sudo apt update
 sudo apt install docker.io -y
 sudo systemctl start docker
 sudo systemctl enable docker
@@ -32,33 +37,39 @@ sudo docker run hello-world
 sudo docker rm -f mynginx
 sudo docker run --name mynginx -d -p 8080:80 nginx
 ```
-- เปิดเบราว์เซอร์ไปที่ `http://<IP-ADDRESS:8080>`
+- `http://<IP-ADDRESS:8080>`
 
 ## 6. สร้าง Docker image ใหม่ที่แสดงไฟล์ HTML
-```bash
-mkdir mynginx
-cd mynginx
-nano index.html
-```
+
+- เปิดไฟล์ `.html`
 - สร้าง `Dockerfile`:
 ```Dockerfile
-nano Dockerfile
-FROM nginx
-COPY index.html /usr/share/nginx/html/index.html
+FROM nginx:latest
+COPY ./html /usr/share/nginx/html
+EXPOSE 80
 ```
-- สร้างและรัน Docker image:
+
+```
+- build docker and push run
 ```bash
 
 docker build -t mycustomnginx .
-docker run --name customnginx -d -p 8081:80 mycustomnginx
+
+docker tag mycustomnginx thanasmp/mycustomnginx
+docker push thanasmp/mycustomnginx
 ```
+
+docker run --name customnginx -d -p 8081:80 mycustomnginx
 - เข้าไปที่ `http://<IP-ADDRESS>:8081`
 
 ## 7. อัปโหลด Image ไปยัง Docker Hub
 ```bash
-docker login
-docker tag mycustomnginx <DOCKER_USERNAME>/mycustomnginx
-docker push <DOCKER_USERNAME>/mycustomnginx
+docker login -u thanasmp
+
+dckr_pat_H327C1sEMcgM4QQu7jdAXkyHjXA
+
+docker tag mycustomnginx thanasmp/mycustomnginx
+docker push thanasmp/mycustomnginx
 ```
 
 ## 8. ใช้ Volume เพื่อแสดงหน้าเว็บจากข้อ 3
