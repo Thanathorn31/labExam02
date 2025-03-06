@@ -124,18 +124,26 @@ nano docker-compose.yml
 
 put this 
 ```
-version: '3'
+version: '3.8'
+
 services:
   web:
-    image: nginx
+    image: nginx:latest
     container_name: my-nginx
     ports:
       - "8083:80"
     volumes:
       - ./newindex.html:/usr/share/nginx/html/index.html
+    restart: always
+
 ```
 then run
 ```
 docker compose up -d
 ```
+stop
+```
+docker-compose down
+```
+
 - เข้าไปที่ `http://<IP-ADDRESS>:8083` เพื่อดูผลลัพธ์
