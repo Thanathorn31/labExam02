@@ -63,9 +63,9 @@ docker push <DOCKER_USERNAME>/mycustomnginx
 
 ## 8. ใช้ Volume เพื่อแสดงหน้าเว็บจากข้อ 3
 ```bash
-docker run --name nginx-volume -d -p 8081:80 -v /var/www/html/index.html:/usr/share/nginx/html/index.html nginx
+docker run --name nginx-volume -d -p 8082:80 -v /var/www/html/index.html:/usr/share/nginx/html/index.html nginx
 ```
-- เข้าไปที่ `http://<IP-ADDRESS>:8081`
+- เข้าไปที่ `http://<IP-ADDRESS>:8082`
 
 ## 9. รัน `docker-compose.yml` ที่ได้รับจากผู้คุมสอบ
 ```bash
@@ -84,7 +84,7 @@ services:
   web:
     image: nginx
     ports:
-      - "8082:80"
+      - "8083:80"
     volumes:
       - /home/user/new_index.html:/usr/share/nginx/html/index.html
 ```
@@ -92,4 +92,4 @@ services:
 ```bash
 docker-compose up -d
 ```
-- เข้าไปที่ `http://<IP-ADDRESS>:8082` เพื่อดูผลลัพธ์
+- เข้าไปที่ `http://<IP-ADDRESS>:8083` เพื่อดูผลลัพธ์
