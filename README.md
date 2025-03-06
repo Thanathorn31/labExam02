@@ -51,30 +51,32 @@ EXPOSE 80
 
 ```
 - build docker and push run
-```bash
-
-docker build -t mycustomnginx .
+```
+docker build --platform linux/amd64 -t mycustomnginx .
 
 docker tag mycustomnginx thanasmp/mycustomnginx
 docker push thanasmp/mycustomnginx
 ```
 
-docker run --name customnginx -d -p 8081:80 mycustomnginx
 - เข้าไปที่ `http://<IP-ADDRESS>:8081`
 
 ## 7. อัปโหลด Image ไปยัง Docker Hub
-```bash
+```
+in vm 
 docker login -u thanasmp
-
 dckr_pat_H327C1sEMcgM4QQu7jdAXkyHjXA
 
-docker tag mycustomnginx thanasmp/mycustomnginx
-docker push thanasmp/mycustomnginx
+docker stop customnginx
+docker rm customnginx
+
+docker pull thanasmp/mycustomnginx
+docker run --name customnginx -d -p 8081:80 thanasmp/mycustomnginx
 ```
 
 ## 8. ใช้ Volume เพื่อแสดงหน้าเว็บจากข้อ 3
 ```bash
-docker run --name nginx-volume -d -p 8082:80 -v /var/www/html/index.html:/usr/share/nginx/html/index.html nginx
+docker run --name mapping -p 8082:80 -v /var/www/html:/usr/share/nginx/html -d nginx
+
 ```
 - เข้าไปที่ `http://<IP-ADDRESS>:8082`
 
@@ -85,22 +87,53 @@ docker-compose up -d
 - เปิดเบราว์เซอร์และดูผลลัพธ์
 
 ## 10. สร้าง HTML ใหม่และรันด้วย `docker-compose.yml`
-```bash
-nano /home/user/new_index.html
+
+back to root folder
 ```
-- เขียน `docker-compose.yml`:
-```yaml
+cd ~ 
+```
+
+
+create new file html
+```
+touch newindex.html
+```
+
+
+edit file html and write something
+```
+nano newindex.html
+```
+
+check file html
+
+```
+ cat newindex.html
+```
+create docker-compose.html
+
+```
+touch docker-compose.yml
+```
+edit file docker-compose
+```
+nano docker-compose.yml
+```
+
+put this 
+```
 version: '3'
 services:
   web:
     image: nginx
+    container_name: my-nginx
     ports:
-      - "8083:80"
+      - "8080:80"
     volumes:
-      - /home/user/new_index.html:/usr/share/nginx/html/index.html
+      - ./newindex.html:/usr/share/nginx/html/index.html
 ```
-- รัน:
-```bash
-docker-compose up -d
+then run
+```
+docker compose up -d
 ```
 - เข้าไปที่ `http://<IP-ADDRESS>:8083` เพื่อดูผลลัพธ์
