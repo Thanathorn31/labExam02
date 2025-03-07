@@ -49,11 +49,10 @@ COPY ./html /usr/share/nginx/html
 EXPOSE 80
 ```
 
-```
+
 - build docker and push run
 ```
 docker build --platform linux/amd64 -t mycustomnginx .
-
 docker tag mycustomnginx thanasmp/mycustomnginx
 docker push thanasmp/mycustomnginx
 ```
