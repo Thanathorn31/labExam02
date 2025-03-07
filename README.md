@@ -2,7 +2,7 @@
 
 ## 1. Create instance (Virtual Machine) 
 
-<img width="901" alt="Screenshot 2568-03-06 at 23 20 02" src="https://github.com/user-attachments/assets/f4e0b663-20b3-41a6-bafe-6e4264dc176f" />
+
 
 ## 2.Connect Vm และ Install Nginx และแสดงหน้า Nginx 
 ```
@@ -13,7 +13,7 @@ sudo systemctl enable nginx
 sudo systemctl status nginx
 ```
 - `http://<IP-ADDRESS>` เพื่อดูหน้าเว็บของ Nginx
-<img width="1122" alt="Screenshot 2568-03-06 at 23 22 30" src="https://github.com/user-attachments/assets/ce711df9-8a58-427e-a114-ebb7d954de44" />
+
 
 ## 3. แก้ไขไฟล์ HTML เพื่อเปลี่ยนหน้าเว็บ
 ```
